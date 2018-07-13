@@ -100,7 +100,7 @@
                 <div class="row container-fluid" style="font-size: 20px;text-align:center">                         
                 @foreach($branchs as $branch)
                     <div class="col-4 col-12-small">
-                        <a href="{{ $selectcity }}/{{ str_replace(' ','_',$branch->bank_branch) }}">{{ $branch->bank_branch }}</a>
+                        <a style="text-decoration: none;" href="{{ $selectcity }}/{{ str_replace(' ','_',$branch->bank_branch) }}">{{ $branch->bank_branch }}</a>
                     </div>
                 @endforeach
                 </div>
@@ -108,7 +108,7 @@
                 <div class="row" style="font-size: 18px;text-align:center">
                 @foreach($cities as $city)
                     <div class="col-4 col-12-small">
-                        <a href="{{ $selectdistrict }}/{{ str_replace(' ','_',$city->bank_city) }}">{{ $city->bank_city }}</a>
+                        <a style="text-decoration: none;" href="{{ $selectdistrict }}/{{ str_replace(' ','_',$city->bank_city) }}">{{ $city->bank_city }}</a>
                     </div>
                 @endforeach
                 </div>
@@ -116,8 +116,7 @@
                 <div class="row" style="font-size: 15px;text-align:center">                               
                 @foreach($districts as $district)
                     <div class="col-4 col-12-small">
-
-                        <a href="{{ $selectstate }}/{{ str_replace(' ','_',$district->bank_district) }}">{{ $district->bank_district }}</a>
+                        <a style="text-decoration: none;" href="{{ $selectstate }}/{{ str_replace(' ','_',$district->bank_district) }}">{{ $district->bank_district }}</a>
                     </div>
                 @endforeach
                 </div>
@@ -125,7 +124,7 @@
                 <div class="row " style="font-size: 13px;text-align:center">                       
                 @foreach($states as $state)
                     <div class="col-4 col-12-small">
-                        <a href="{{ $selectbank }}/{{ str_replace(' ','_',$state->bank_state) }}">{{ $state->bank_state }}</a>
+                        <a style="text-decoration: none;" href="{{ $selectbank }}/{{ str_replace(' ','_',$state->bank_state) }}">{{ $state->bank_state }}</a>
                     </div>    
                 @endforeach
                 </div>
@@ -133,7 +132,7 @@
                 <div class="row" style="font-size: 10px;text-align:center">                   
                 @foreach($banks as $bank)
                     <div class="col-4 col-12-small">
-                        <a href="banks/{{ str_replace(' ','_',$bank->bank_name) }}">{{ $bank->bank_name }}</a>
+                        <a style="text-decoration: none;" href="banks/{{ str_replace(' ','_',$bank->bank_name) }}">{{ $bank->bank_name }}</a>
                     </div>
                 @endforeach    
                 </div>
