@@ -48,14 +48,14 @@ class HomeController extends BaseController
    	}
    	public function bankLastPage($selectedbankname)
    	{
-   		
-  		   $bank = DB::table('bank_details')->select('bank_name')->distinct()->get();
-
+  		  $bank = DB::table('bank_details')->select('bank_name')->distinct()->get();
         $states = DB::table('bank_details')->where('bank_name','=', str_replace('_', ' ', $selectedbankname))->select('bank_state')->distinct()->get();
+        $paginationstate = DB::table('bank_details')->where('bank_name','=',str_replace('_', ' ', $selectedbankname))->paginate(2);
    		return view('ifschome')->with([
    			"banks"=>$bank,
    			"states"=>$states,
-   			"selectbank"=>$selectedbankname
+   			"selectbank"=>$selectedbankname,
+        "paginatestate" => $paginationstate,
    		]); 		
    	}
    	public function stateLastPage($selectedbank,$selectstate)
@@ -63,13 +63,14 @@ class HomeController extends BaseController
    		  $bank = DB::table('bank_details')->select('bank_name')->distinct()->get();
         $states = DB::table('bank_details')->where('bank_name','=', str_replace('_', ' ', $selectedbank))->select('bank_state')->distinct()->get();
         $district = DB::table('bank_details')->where([['bank_name','=', str_replace('_', ' ', $selectedbank)],['bank_state','=', str_replace('_', ' ', $selectstate)]])->select('bank_district')->distinct()->get();
-
+       $paginatedistrict = DB::table('bank_details')->where([['bank_name','=', str_replace('_', ' ', $selectedbank)],['bank_state','=', str_replace('_', ' ', $selectstate)]])->paginate(2);
         return view('ifschome')->with([
         	"banks"=>$bank,
-   			"states"=>$states,
-   			"selectbank"=>$selectedbank,
-   			"selectstate" => $selectstate,
-        	"districts" => $district
+   			  "states"=>$states,
+   			  "selectbank"=>$selectedbank,
+   			  "selectstate" => $selectstate,
+        	"districts" => $district,
+          "paginatedistrict" => $paginatedistrict,
         ]);
    		
    	}
@@ -82,15 +83,16 @@ class HomeController extends BaseController
         $district = DB::table('bank_details')->where([['bank_name','=', str_replace('_', ' ', $selectbank)],['bank_state','=', str_replace('_', ' ', $selectstate)]])->select('bank_district')->distinct()->get();
         $cities = DB::table('bank_details')->where([['bank_name','=', str_replace('_', ' ', $selectbank)],['bank_state','=', str_replace('_', ' ', $selectstate)],['bank_district','=', str_replace('_', ' ', $selectdistrict)]])->select('bank_city')->distinct()->get();
 
-      //  dd($cities);
+        $paginatecity = DB::table('bank_details')->where([['bank_name','=', str_replace('_', ' ', $selectbank)],['bank_state','=', str_replace('_', ' ', $selectstate)],['bank_district','=', str_replace('_', ' ', $selectdistrict)]])->paginate(2);
         return view('ifschome')->with([
         	"banks"=>$bank,
-   			"states"=>$states,
-   			"selectbank"=>$selectbank,
-   			"selectstate" => $selectstate,
+     			"states"=>$states,
+     			"selectbank"=>$selectbank,
+     			"selectstate" => $selectstate,
         	"districts" => $district,
         	"selectdistrict" => $selectdistrict,
-        	"cities" => $cities
+        	"cities" => $cities,
+          "paginatecity"=>$paginatecity
         ]);				
    	}
    	public function cityLastPage($selectbank,$selectstate,$selectdistrict,$selectcity)
@@ -101,6 +103,7 @@ class HomeController extends BaseController
         $district = DB::table('bank_details')->where([['bank_name','=', str_replace('_', ' ', $selectbank)],['bank_state','=', str_replace('_', ' ', $selectstate)]])->select('bank_district')->distinct()->get();
         $cities = DB::table('bank_details')->where([['bank_name','=', str_replace('_', ' ', $selectbank)],['bank_state','=', str_replace('_', ' ', $selectstate)],['bank_district','=', str_replace('_', ' ', $selectdistrict)]])->select('bank_city')->distinct()->get();
         $branchs = DB::table('bank_details')->where([['bank_name','=', str_replace('_', ' ', $selectbank)],['bank_state','=', str_replace('_', ' ', $selectstate)],['bank_district','=', str_replace('_', ' ', $selectdistrict)],['bank_city','=', str_replace('_', ' ', $selectcity)]])->select('bank_branch')->distinct()->get();
+        $paginatebranch = DB::table('bank_details')->where([['bank_name','=', str_replace('_', ' ', $selectbank)],['bank_state','=', str_replace('_', ' ', $selectstate)],['bank_district','=', str_replace('_', ' ', $selectdistrict)],['bank_city','=', str_replace('_', ' ', $selectcity)]])->paginate(2);
         return view('ifschome')->with([
         	"banks"=>$bank,
      			"states"=>$states,
@@ -111,6 +114,7 @@ class HomeController extends BaseController
         	"cities" => $cities,
         	"selectcity" => $selectcity,
         	"branchs" => $branchs,
+          "paginatebranch" => $paginatebranch
         ]);				
    	}
    	public function branchLastPage($selectbank,$selectstate,$selectdistrict,$selectcity,$selectbranch)
@@ -122,10 +126,8 @@ class HomeController extends BaseController
         $district = DB::table('bank_details')->where([['bank_name','=', str_replace('_', ' ', $selectbank)],['bank_state','=', str_replace('_', ' ', $selectstate)]])->select('bank_district')->distinct()->get();
         $cities = DB::table('bank_details')->where([['bank_name','=', str_replace('_', ' ', $selectbank)],['bank_state','=', str_replace('_', ' ', $selectstate)],['bank_district','=', str_replace('_', ' ', $selectdistrict)]])->select('bank_city')->distinct()->get();
         $branchs = DB::table('bank_details')->where([['bank_name','=', str_replace('_', ' ', $selectbank)],['bank_state','=', str_replace('_', ' ', $selectstate)],['bank_district','=', str_replace('_', ' ', $selectdistrict)],['bank_city','=', str_replace('_', ' ', $selectcity)]])->select('bank_branch')->distinct()->get();
-      	$ifscresponse = Curl::to('https://api.techm.co.in/api/getbank/'.str_replace('_', '%20', $selectbank).'/'.str_replace('_', '%20', $selectbranch))
-   		 	->asJson()
-        	->get();
-        $ifscdata = $ifscresponse->data;
+      	$ifscresponse = DB::table('bank_details')->where([['bank_name','=', str_replace('_', ' ', $selectbank)],['bank_state','=', str_replace('_', ' ', $selectstate)],['bank_district','=', str_replace('_', ' ', $selectdistrict)],['bank_city','=', str_replace('_', ' ', $selectcity)]])->distinct()->first();
+       
        
         return view('ifschome')->with([
         	"banks"=>$bank,
@@ -138,7 +140,7 @@ class HomeController extends BaseController
         	"selectcity" => $selectcity,
         	"branchs" => $branchs,
         	"selectbranch" => $selectbranch,
-          "ifscdata" => $ifscdata
+          "ifscdata" => $ifscresponse
         ]);				
    	}
 
