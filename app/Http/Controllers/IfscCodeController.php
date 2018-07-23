@@ -14,12 +14,16 @@ class IfscCodeController extends BaseController
 {
    public function index()
    {
-   	return view('ifsccode');
+     $bank = DB::table('bank_details')->select('bank_name')->distinct()->get();
+   	return view('ifsccode')->with([
+       "banks" => $bank
+    ]);
    }
 
    public function findifsc()
    {
    		$ifsc = Input::get('ifsccode', false);
+     
    		$response = Curl::to('https://api.techm.co.in/api/v1/ifsc/'.$ifsc)
    		->asJson()
         ->get();
@@ -27,6 +31,7 @@ class IfscCodeController extends BaseController
         return view('ifsccode')->with([
         	"ifsc" => $ifsc,
         	"ifscdata" => $ifscdata,
+          "banks" => $bank
         ]);
         
    }

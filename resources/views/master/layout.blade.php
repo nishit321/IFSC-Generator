@@ -1,4 +1,3 @@
-<!DOCTYPE HTML>
 <html>
 	<head>
 		<title>@yield('title')</title>
@@ -8,11 +7,29 @@
 		<meta name="keywords" content="" />
 		  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 		<link rel="stylesheet" href=" {{URL::to('template/assets/css/main.css')}}" />
+		<!-- Dropdown List -->
+	    <script src='{{URL::to('select2/dist/js/select2.min.js')}}' type='text/javascript'></script>
+    	<!-- CSS -->
+    	<link href='{{URL::to('select2/dist/css/select2.min.css')}}' rel='stylesheet' type='text/css'>
+ 		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    	<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
 		<style type="text/css">
+		  .select2-selection__rendered {
+		    line-height: 46px !important;
+		  }
+		  .select2-container .select2-selection--single {
+		    height: 46px !important;
+		    box-sizing: border-box;
+		    outline: none;
+		    border: 1px solid #555;
+		    border-radius:0px;
+		  }
+		  .select2-selection__arrow {
+		    height: 44px !important;
+		  }
 		</style>
 	</head>
 	<body class="is-preload">
-
 		<!-- Header -->
 			<header id="header">
 				<a class="logo" href="index.html">IFSC Code</a>
@@ -39,28 +56,11 @@
 		<!-- Footer -->
 			<footer id="footer">
 				<div class="inner">
-					<div class="content">
+					
 						<section>
-							<h3>Accumsan montes viverra</h3>
-							<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing. Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing sed feugiat eu faucibus. Integer ac sed amet praesent. Nunc lacinia ante nunc ac gravida.</p>
+							@yield('footer')
 						</section>
-						<section>
-							<h4>Site Map</h4>
-							<ul class="alt">
-								<li><a href="/ifsccode">Find By IFSC Code</a></li>
-								<li><a href="/">Find By Address</a></li>
-							</ul>
-						</section>
-						<section>
-							<h4>Magna sed ipsum</h4>
-							<ul class="plain">
-								<li><a href="#"><i class="icon fa-twitter">&nbsp;</i>Twitter</a></li>
-								<li><a href="#"><i class="icon fa-facebook">&nbsp;</i>Facebook</a></li>
-								<li><a href="#"><i class="icon fa-instagram">&nbsp;</i>Instagram</a></li>
-								<li><a href="#"><i class="icon fa-github">&nbsp;</i>Github</a></li>
-							</ul>
-						</section>
-					</div>
+					
 					<div class="copyright">
 						&copy;  
 					</div>

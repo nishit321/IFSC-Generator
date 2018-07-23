@@ -1,4 +1,12 @@
-@extends('master.layout') @section('title') @if(!empty($selectbank)) {{str_replace('_', ' ', $selectbank)}} @else {{'IFSC'}} @endif @endsection @section('content')
+@extends('master.layout') 
+@section('title') 
+    @if(!empty($selectbank)) 
+        {{str_replace('_', ' ', $selectbank)}} 
+    @else {{'IFSC'}} 
+    @endif
+@endsection 
+
+@section('content')
 <header class="special">
     <h2>IFSC Code Bank
   </h2>
@@ -6,7 +14,9 @@
     </p>
 </header>
 {{ Form::open(['route' => 'banks', 'method' => 'GET'])}}
-<select onchange="this.form.submit()" name="bank">
+
+<center>
+<select  id="selUser1" onchange="this.form.submit()" name="bank" style="width: 80%;margin-left:20%;">
     <option>Select Bank
     </option>
     @foreach($banks as $bank)
@@ -15,7 +25,8 @@
     @endforeach
 </select>
 <br>
-<select onchange="this.form.submit()" name="state">
+<br>
+<select  id="selUser2" onchange="this.form.submit()" name="state" style="width: 80%;margin: 0 auto;">
     <option value="">Select State
     </option>
     @if(!empty($states)) @foreach($states as $state)
@@ -24,7 +35,9 @@
     @endforeach @endif
 </select>
 <br>
-<select onchange="this.form.submit()" name="district">
+<br>
+<center>
+<select id="selUser3" onchange="this.form.submit()" name="district" style="width: 80%;margin: 0 auto;">
     <option value="">Select Distict
     </option>
     @if(!empty($districts)) @foreach($districts as $district)
@@ -32,8 +45,10 @@
     </option>
     @endforeach @endif
 </select>
+
 <br>
-<select onchange="this.form.submit()" name="city">
+<br>
+<select id="selUser4" onchange="this.form.submit()" name="city" style="width: 80%;margin: 0 auto;">
     <option value="">Select City
     </option>
     @if(!empty($cities)) @foreach($cities as $city)
@@ -42,7 +57,8 @@
     @endforeach @endif
 </select>
 <br>
-<select onchange="this.form.submit()" name="branch">
+<br>
+<select id="selUser5" onchange="this.form.submit()" name="branch" style="width: 80%;margin: 0 auto;">
     <option value="">Select Branch
     </option>
     @if(!empty($branchs)) @foreach($branchs as $branch)
@@ -50,12 +66,10 @@
     </option>
     @endforeach @endif
 </select>
+</center>
 {{ Form::close() }}
 <br>
-<header class="special">
-    <h2>List of IFSC Codes
-  </h2>
-</header>
+<br>
 @if(!empty($ifscdata))
 <div class="table-wrapper">
     <table class="table" border="1" width: 100%;>
@@ -107,7 +121,9 @@
         </tbody>
     </table>
 </div>
-@elseif(!empty($branchs)) @if(isset($paginatebranch)) @foreach($paginatebranch as $branch)
+@elseif(!empty($branchs)) 
+@if(isset($paginatebranch)) 
+@foreach($paginatebranch as $branch)
 <div class="table-wrapper">
     <table class="alt" border="1">
         <tbody>
@@ -322,8 +338,8 @@
                 <td>IFSC Code
                     </th>
                     <td>
-                        <b>{{ $state->bank_ifsc }}
-        </b>
+                        <b>{{ $state->bank_ifsc }}</b>
+
                     </td>
             </tr>
             <tr>
@@ -384,11 +400,13 @@
     @endforeach
 </div>
 @elseif(!empty($banks))
-<div class="row" style="font-size: 10px;text-align:center">
     <header class="special">
         <h2>List of Banks
     </h2>
     </header>
+<div class="row" style="font-size: 10px;text-align:center">
+   
+    <br>
     @foreach($banks as $bank)
     <div class="col-4 col-12-small">
         <a style="text-decoration: none;" href="banks/{{ str_replace(' ','_',$bank->bank_name) }}">{{ $bank->bank_name }}
@@ -397,5 +415,104 @@
     @endforeach
 </div>
 @endif
-</div>
+    <br>
+    <br>
+    <br>
+    <div class="content"> 
+    <header class="special">
+        <h2>Search IFSC Codes of major Banks in India</h2>
+    </header>
+    <p>
+        You can search through 90,000+ IFSC Codes of 125+ Banks in India! We are making earnest efforts in keeping the information updated by adding IFSC codes of banks as they get available on RBI website.
+    </p>
+    <header class="special">
+        <h2>How can I find IFSC Code for a Bank?</h2>
+    </header>
+    <p>
+       The easiest way to Find IFSC Code for Banks in India is to start by the Bank you are looking for. You can further filter List of IFSC Codes by State, District and City. Or you may directly key in first few characters of Branch Name, Locality or address. You can also try our FAST search to find Codes by Branch, Address or Locality. You can also Search by IFSC Code.
+    </p>
+    <header class="special">
+        <h2>What is IFSC code?</h2>
+    </header>
+    <p>
+      The Indian Financial System Code (also known as IFSC) is a 11 character code for identifying the bank and branch which an account is held. The IFSC code is used both by the NEFT, RTGS and IMPS finance transfer systems.
+    </p>
+    
+    </div>
+    <script>
+
+     // Initialize select2
+    $("#selUser1").select2();
+
+    // Read selected option
+    $('#but_read').click(function(){
+      var username = $('#selUser1 option:selected').text();
+      var userid = $('#selUser1').val();
+
+      $('#result').html("id : " + userid + ", name : " + username);
+      });
+
+    // Initialize select2
+    $("#selUser2").select2();
+
+    // Read selected option
+    $('#but_read').click(function(){
+      var username = $('#selUser2 option:selected').text();
+      var userid = $('#selUser2').val();
+
+      $('#result').html("id : " + userid + ", name : " + username);
+      });
+     
+
+     // Initialize select2
+     $("#selUser3").select2();
+
+     // Read selected option
+     $('#but_read').click(function(){
+      var username = $('#selUser3 option:selected').text();
+      var userid = $('#selUser3').val();
+
+      $('#result').html("id : " + userid + ", name : " + username);
+      });
+
+        // Initialize select2
+     $("#selUser4").select2();
+
+     // Read selected option
+     $('#but_read').click(function(){
+      var username = $('#selUser4 option:selected').text();
+      var userid = $('#selUser4').val();
+
+      $('#result').html("id : " + userid + ", name : " + username);
+      });
+     
+        // Initialize select2
+      $("#selUser5").select2();
+
+     // Read selected option
+     $('#but_read').click(function(){
+      var username = $('#selUser5 option:selected').text();
+      var userid = $('#selUser5').val();
+
+      $('#result').html("id : " + userid + ", name : " + username);
+      });
+     
+     
+</script>
 @endsection
+
+@section('footer')
+            <header class="special">
+                <h2>List of Banks</h2>
+            </header>
+            <div class="row" style="font-size: 10px;text-align:left">   
+                @foreach($banks as $bank)
+                    <div class="col-4 col-12-small">
+                        <a href="/banks/{{ str_replace(' ','_',$bank->bank_name) }}">{{ $bank->bank_name }} Near Me</a>
+                    </div>
+                @endforeach 
+            </div>
+            <br>
+            <br>
+            
+@endsection 

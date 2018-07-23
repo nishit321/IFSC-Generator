@@ -54,3 +54,18 @@
                             @endif
 @endsection
 
+@section('footer')
+            <header class="special">
+                <h2>List of Banks</h2>
+            </header>
+            <div class="row" style="font-size: 10px;text-align:left">   
+                @foreach($banks as $bank)
+                    <div class="col-4 col-12-small">
+                        <a href="/banks/{{ str_replace(' ','_',$bank->bank_name) }}">{{ $bank->bank_name }} Customer Care</a>
+                    </div>
+                @endforeach 
+            </div>
+            <br>
+            <br>
+            
+@endsection 
