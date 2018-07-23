@@ -48,7 +48,7 @@ class HomeController extends BaseController
    	}
    	public function bankLastPage($selectedbankname)
    	{
-  		  $bank = DB::table('bank_details')->select('bank_name')->orderBy('bank_name', 'ASC')->distinct()->get();
+  		$bank = DB::table('bank_details')->select('bank_name')->orderBy('bank_name', 'ASC')->distinct()->get();
         $states = DB::table('bank_details')->where('bank_name','=', str_replace('_', ' ', $selectedbankname))->select('bank_state')->orderBy('bank_state', 'ASC')->distinct()->get();
         $paginationstate = DB::table('bank_details')->where('bank_name','=',str_replace('_', ' ', $selectedbankname))->paginate(4);
    		return view('ifschome')->with([
