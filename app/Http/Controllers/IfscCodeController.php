@@ -23,7 +23,7 @@ class IfscCodeController extends BaseController
    public function findifsc()
    {
    		$ifsc = Input::get('ifsccode', false);
-     
+      $bank = DB::table('bank_details')->select('bank_name')->orderBy('bank_name', 'ASC')->distinct()->get();
    		$response = Curl::to('https://api.techm.co.in/api/v1/ifsc/'.$ifsc)
    		->asJson()
         ->get();

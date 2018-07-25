@@ -70,117 +70,199 @@
 {{ Form::close() }}
 <br>
 <br>
-@if(!empty($ifscdata))
-<div class="table-wrapper">
-    <table class="table" border="1" width: 100%;>
+@if(!empty($paginateTables))
+
+@foreach($paginateTables as $bank)
+<div class="table-wrapper row">
+    <div class="col-md-6">
+    <table class="alt" style="float: left" border="1">
         <tbody>
             <tr>
-                <td>IFSC Code
-                    </th>
+                <td><b>IFSC Code</b>
+                    </td>
                     <td>
-                        <b>{{ $ifscdata->bank_ifsc }}
-        </b>
+                        <b><a href="/banks/{{ str_replace(' ','_',$bank->bank_name) }}/{{ str_replace(' ','_',$bank->bank_state) }}/{{ str_replace(' ','_',$bank->bank_district) }}/{{ str_replace(' ','_',$bank->bank_city) }}/{{ str_replace(' ','_',$bank->bank_branch) }}">{{ $bank->bank_ifsc }}</a></b>
+                        <button type="button" class="btn" data-clipboard-text="{{ $bank->bank_ifsc }}">
+                            Copy to clipboard
+                        </button>
                     </td>
             </tr>
             <tr>
-                <td>Bank
-                    </th>
+                <td><b>Bank</b>
+                    </td>
+                    <td>{{ $bank->bank_name }}
+                    </td>
+            </tr>
+            <tr>
+                <td><b>Branch</b>
+                    </td>
+                    <td><a href="/banks/{{ str_replace(' ','_',$bank->bank_name) }}/{{ str_replace(' ','_',$bank->bank_state) }}/{{ str_replace(' ','_',$bank->bank_district) }}/{{ str_replace(' ','_',$bank->bank_city) }}/{{ str_replace(' ','_',$bank->bank_branch) }}">{{ $bank->bank_branch }}</a>
+                    </td>
+            </tr>
+            <tr>
+                <td><b>Open Hours:</b></td>
+                <td>Monday to Saturday 10 am to 4 pm</td>
+            </tr>
+            
+            <tr>
+                <td><b>City</b>
+                    </td>
+                    <td><a href="/banks/{{ str_replace(' ','_',$bank->bank_name) }}/{{ str_replace(' ','_',$bank->bank_state) }}/{{ str_replace(' ','_',$bank->bank_district) }}/{{ str_replace(' ','_',$bank->bank_city) }}" >{{ $bank->bank_city }}</a>
+                    </td>
+            </tr>
+            <tr>
+                <td><b>District
+                    </td>
+                    <td><a href="/banks/{{ str_replace(' ','_',$bank->bank_name) }}/{{ str_replace(' ','_',$bank->bank_state) }}/{{ str_replace(' ','_',$bank->bank_district) }}">{{ $bank->bank_district }}</a>
+                    </td>
+            </tr>
+            <tr>
+                <td><b>State</b>
+                    </td>
+                    <td><a href="/banks/{{ str_replace(' ','_',$bank->bank_name) }}/{{ str_replace(' ','_',$bank->bank_state) }}">{{ $bank->bank_state }}</a>
+                    </td>
+            </tr>
+            <tr>
+                <td><b>Country:</td>
+                <td>IN</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="col-md-6">
+    <table class="alt"  style="float: left"  border="1">
+        
+            <tr>
+                <td><b>Remittance Services:</b></td>
+                <td>NEFT</td>
+            </tr>
+            <tr>
+                <td><b>Mode Of Payment:</b></td>
+                <td>Cash,Cheque,Demand Draft and Net banking</td>
+            </tr>
+            <tr>
+                <td><b>ATM:</b></td>
+                <td>24X7</td>
+            </tr>
+            <tr>
+                <td><b>Debit Services:</b></td>
+                <td>YES</td>
+            </tr>
+            <tr>
+                <td><b>Credit Services:</b></td>
+                <td>YES</td>
+            </tr>
+            <tr>
+                <td><b>Address</b>
+                    </td>
+                    <td>{{ $bank->bank_address }}
+                    </td>
+            </tr>
+        
+    </table>
+    </div>
+</div>
+<hr> 
+@endforeach
+<div class="pages">
+    <ul class="pagination justify-content-center" style="text-decoration: none">
+        {{ $paginateTables->links() }}
+    </ul>
+</div>
+@endif
+
+@if(!empty($ifscdata))
+<div class="table-wrapper row">
+    <div class="col-md-6">
+    <table class="alt" style="float: left" border="1">
+        <tbody>
+            <tr>
+                <td><b>IFSC Code</b>
+                    </td>
+                    <td>
+                        <b><a href=""></a> {{ $ifscdata->bank_ifsc }}</b>
+                        <button type="button" class="btn" data-clipboard-text="{{ $ifscdata->bank_ifsc }}">
+                            Copy to clipboard
+                        </button>
+                    </td>
+            </tr>
+            <tr>
+                <td><b>Bank</b>
+                    </td>
                     <td>{{ $ifscdata->bank_name }}
                     </td>
             </tr>
             <tr>
-                <td>Branch
-                    </th>
+                <td><b>Branch</b>
+                    </td>
                     <td>{{ $ifscdata->bank_branch }}
                     </td>
             </tr>
             <tr>
-                <td>Address
-                    </th>
-                    <td>{{ $ifscdata->bank_address }}
-                    </td>
+                <td><b>Open Hours:</b></td>
+                <td>Monday to Saturday 10 am to 4 pm</td>
             </tr>
+            
             <tr>
-                <td>City
-                    </th>
+                <td><b>City</b>
+                    </td>
                     <td>{{ $ifscdata->bank_city }}
                     </td>
             </tr>
             <tr>
-                <td>District
-                    </th>
+                <td><b>District
+                    </td>
                     <td>{{ $ifscdata->bank_district }}
                     </td>
             </tr>
             <tr>
-                <td>State
-                    </th>
+                <td><b>State</b>
+                    </td>
                     <td>{{ $ifscdata->bank_state }}
                     </td>
             </tr>
+            <tr>
+                <td><b>Country:</td>
+                <td>IN</td>
+            </tr>
         </tbody>
     </table>
+    </div>
+    <div class="col-md-6">
+    <table class="alt"  style="float: left"  border="1">
+        
+            <tr>
+                <td><b>Remittance Services:</b></td>
+                <td>NEFT</td>
+            </tr>
+            <tr>
+                <td><b>Mode Of Payment:</b></td>
+                <td>Cash,Cheque,Demand Draft and Net banking</td>
+            </tr>
+            <tr>
+                <td><b>ATM:</b></td>
+                <td>24X7</td>
+            </tr>
+            <tr>
+                <td><b>Debit Services:</b></td>
+                <td>YES</td>
+            </tr>
+            <tr>
+                <td><b>Credit Services:</b></td>
+                <td>YES</td>
+            </tr>
+            <tr>
+                <td><b>Address</b>
+                    </td>
+                    <td>{{ $ifscdata->bank_address }}
+                    </td>
+            </tr>
+        
+    </table>
+    </div>
 </div>
+
 @elseif(!empty($branchs)) 
-@if(isset($paginatebranch)) 
-@foreach($paginatebranch as $branch)
-<div class="table-wrapper">
-    <table class="alt" border="1">
-        <tbody>
-            <tr>
-                <td>IFSC Code
-                    </th>
-                    <td>
-                        <b>{{ $branch->bank_ifsc }}
-        </b>
-                    </td>
-            </tr>
-            <tr>
-                <td>Bank
-                    </th>
-                    <td>{{ $branch->bank_name }}
-                    </td>
-            </tr>
-            <tr>
-                <td>Branch
-                    </th>
-                    <td>{{ $branch->bank_branch }}
-                    </td>
-            </tr>
-            <tr>
-                <td>Address
-                    </th>
-                    <td>{{ $branch->bank_address }}
-                    </td>
-            </tr>
-            <tr>
-                <td>City
-                    </th>
-                    <td>{{ $branch->bank_city }}
-                    </td>
-            </tr>
-            <tr>
-                <td>District
-                    </th>
-                    <td>{{ $branch->bank_district }}
-                    </td>
-            </tr>
-            <tr>
-                <td>State
-                    </th>
-                    <td>{{ $branch->bank_state }}
-                    </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-@endforeach
-<div class="pages">
-    <ul class="pagination justify-content-center" style="text-decoration: none">
-        {{ $paginatebranch->links() }}
-    </ul>
-</div>
-@endif
 <header class="special">
     <h2>List of Branchs
   </h2>
@@ -193,62 +275,7 @@
     </div>
     @endforeach
 </div>
-@elseif(!empty($cities)) @foreach($paginatecity as $city)
-<div class="table-wrapper">
-    <table class="alt" border="1">
-        <tbody>
-            <tr>
-                    <td>IFSC Code
-                    </th>
-                    <td>
-                        <b>{{ $city->bank_ifsc }}</b>
-                    </td>
-            </tr>
-            <tr>
-                    <td>Bank</th>
-                    <td>
-                        {{ $city->bank_name }}
-                    </td>
-            </tr>
-            <tr>
-                    <td>Branch</th>
-                    <td>
-                        {{ $city->bank_branch }}
-                    </td>
-            </tr>
-            <tr>
-                    <td>Address</th>
-                    <td>
-                        {{ $city->bank_address }}
-                    </td>
-            </tr>
-            <tr>
-                    <td>City</th>
-                    <td>
-                        {{ $city->bank_city }}
-                    </td>
-            </tr>
-            <tr>
-                    <td>District</th>
-                    <td>
-                        {{ $city->bank_district }}
-                    </td>
-            </tr>
-            <tr>
-                <td>State</th> 
-                <td>
-                    {{ $city->bank_state }}
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-@endforeach
-<div class="pages">
-    <ul class="pagination justify-content-center" style="text-decoration: none">
-        {{ $paginatecity->links() }}
-    </ul>
-</div>
+@elseif(!empty($cities)) 
 <header class="special">
     <h2>List of Cities
   </h2>
@@ -261,63 +288,8 @@
     </div>
     @endforeach
 </div>
-@elseif(!empty($districts)) @foreach($paginatedistrict as $district)
-<div class="table-wrapper">
-    <table class="alt" border="1">
-        <tbody>
-            <tr>
-                <td>IFSC Code
-                    </th>
-                    <td>
-                        <b>{{ $district->bank_ifsc }}
-        </b>
-                    </td>
-            </tr>
-            <tr>
-                <td>Bank
-                    </th>
-                    <td>{{ $district->bank_name }}
-                    </td>
-            </tr>
-            <tr>
-                <td>Branch
-                    </th>
-                    <td>{{ $district->bank_branch }}
-                    </td>
-            </tr>
-            <tr>
-                <td>Address
-                    </th>
-                    <td>{{ $district->bank_address }}
-                    </td>
-            </tr>
-            <tr>
-                <td>City
-                    </th>
-                    <td>{{ $district->bank_city }}
-                    </td>
-            </tr>
-            <tr>
-                <td>District
-                    </th>
-                    <td>{{ $district->bank_district }}
-                    </td>
-            </tr>
-            <tr>
-                <td>State
-                    </th>
-                    <td>{{ $district->bank_state }}
-                    </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-@endforeach
-<div class="pages">
-    <ul class="pagination justify-content-center" style="text-decoration: none">
-        {{ $paginatedistrict->links() }}
-    </ul>
-</div>
+@elseif(!empty($districts)) 
+
 <header class="special">
     <h2>List of Districts
   </h2>
@@ -330,63 +302,8 @@
     </div>
     @endforeach
 </div>
-@elseif(!empty($states)) @foreach($paginatestate as $state)
-<div class="table-wrapper">
-    <table class="alt" border="1">
-        <tbody>
-            <tr>
-                <td>IFSC Code
-                    </th>
-                    <td>
-                        <b>{{ $state->bank_ifsc }}</b>
+@elseif(!empty($states)) 
 
-                    </td>
-            </tr>
-            <tr>
-                <td>Bank
-                    </th>
-                    <td>{{ $state->bank_name }}
-                    </td>
-            </tr>
-            <tr>
-                <td>Branch
-                    </th>
-                    <td>{{ $state->bank_branch }}
-                    </td>
-            </tr>
-            <tr>
-                <td>Address
-                    </th>
-                    <td>{{ $state->bank_address }}
-                    </td>
-            </tr>
-            <tr>
-                <td>City
-                    </th>
-                    <td>{{ $state->bank_city }}
-                    </td>
-            </tr>
-            <tr>
-                <td>District
-                    </th>
-                    <td>{{ $state->bank_district }}
-                    </td>
-            </tr>
-            <tr>
-                <td>State
-                    </th>
-                    <td>{{ $state->bank_state }}
-                    </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-@endforeach
-<div class="pages">
-    <ul class="pagination justify-content-center" style="text-decoration: none">
-        {{ $paginatestate->links() }}
-    </ul>
-</div>
 <header class="special">
     <h2>List of States
   </h2>
@@ -426,10 +343,10 @@
         You can search through 90,000+ IFSC Codes of 125+ Banks in India! We are making earnest efforts in keeping the information updated by adding IFSC codes of banks as they get available on RBI website.
     </p>
     <header class="special">
-        <h2>How can I find IFSC Code for a Bank?</h2>
+        <h2>How can I find IFSC Code for a  @if(!empty($selectbank)){{str_replace('_',' ',$selectbank)}} @else Bank @endif?</h2>
     </header>
     <p>
-       The easiest way to Find IFSC Code for Banks in India is to start by the Bank you are looking for. You can further filter List of IFSC Codes by State, District and City. Or you may directly key in first few characters of Branch Name, Locality or address. You can also try our FAST search to find Codes by Branch, Address or Locality. You can also Search by IFSC Code.
+       The easiest way to Find IFSC Code for @if(!empty($selectbank)){{str_replace('_',' ',$selectbank)}} @else Banks in India @endif  is to start by the Bank you are looking for. You can further filter List of IFSC Codes by State, District and City. Or you may directly key in first few characters of Branch Name, Locality or address. You can also try our FAST search to find Codes by Branch, Address or Locality. You can also Search by IFSC Code.
     </p>
     <header class="special">
         <h2>What is IFSC code?</h2>
@@ -496,14 +413,20 @@
 
       $('#result').html("id : " + userid + ", name : " + username);
       });
-     
+        var clip = new Clipboard('.btn');
+        clip.on("success", function() {
+         
+        });
+        clip.on("error", function() {
+         
+        }); 
      
 </script>
 @endsection
 
 @section('footer')
             <header class="special">
-                <h2>List of Banks</h2>
+                <h2>List of Banks NearBy You</h2>
             </header>
             <div class="row" style="font-size: 10px;text-align:left">   
                 @foreach($banks as $bank)

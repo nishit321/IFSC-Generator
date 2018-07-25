@@ -48,14 +48,14 @@ class HomeController extends BaseController
    	}
    	public function bankLastPage($selectedbankname)
    	{
-  		$bank = DB::table('bank_details')->select('bank_name')->orderBy('bank_name', 'ASC')->distinct()->get();
+  		  $bank = DB::table('bank_details')->select('bank_name')->orderBy('bank_name', 'ASC')->distinct()->get();
         $states = DB::table('bank_details')->where('bank_name','=', str_replace('_', ' ', $selectedbankname))->select('bank_state')->orderBy('bank_state', 'ASC')->distinct()->get();
         $paginationstate = DB::table('bank_details')->where('bank_name','=',str_replace('_', ' ', $selectedbankname))->paginate(4);
    		return view('ifschome')->with([
    			"banks"=>$bank,
    			"states"=>$states,
    			"selectbank"=>$selectedbankname,
-        "paginatestate" => $paginationstate,
+        "paginateTables" => $paginationstate,
    		]); 		
    	}
    	public function stateLastPage($selectedbank,$selectstate)
@@ -73,7 +73,7 @@ class HomeController extends BaseController
    			  "selectbank"=>$selectedbank,
    			  "selectstate" => $selectstate,
         	"districts" => $district,
-          "paginatedistrict" => $paginatedistrict,
+          "paginateTables" => $paginatedistrict,
         ]);
    		
    	}
@@ -97,7 +97,7 @@ class HomeController extends BaseController
         	"districts" => $district,
         	"selectdistrict" => $selectdistrict,
         	"cities" => $cities,
-          "paginatecity"=>$paginatecity
+          "paginateTables"=>$paginatecity
         ]);				
    	}
    	public function cityLastPage($selectbank,$selectstate,$selectdistrict,$selectcity)
@@ -123,7 +123,7 @@ class HomeController extends BaseController
         	"cities" => $cities,
         	"selectcity" => $selectcity,
         	"branchs" => $branchs,
-          "paginatebranch" => $paginatebranch
+          "paginateTables" => $paginatebranch
         ]);				
    	}
    	public function branchLastPage($selectbank,$selectstate,$selectdistrict,$selectcity,$selectbranch)
