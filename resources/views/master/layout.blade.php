@@ -14,6 +14,16 @@
     	<link href='{{URL::to('select2/dist/css/select2.min.css')}}' rel='stylesheet' type='text/css'>
  		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     	<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
+
+    	<!-- ads -->
+    	<script async="async" src="https://www.google.com/adsense/search/ads.js"></script>
+		<!-- other head elements from your page -->
+		<script type="text/javascript" charset="utf-8">
+		(function(g,o){g[o]=g[o]||function(){(g[o]['q']=g[o]['q']||[]).push(
+		  arguments)},g[o]['t']=1*new Date})(window,'_googCsa');
+		</script>
+
+
 		<style type="text/css">
 		  .select2-selection__rendered {
 		    line-height: 46px !important;
@@ -51,17 +61,49 @@
 			</header>
 
 		<!-- Banner -->
-		
-		<div id="theleftiframe" style="overflow:auto;width:200px;height:100%;background:#ccc;float:left;left:0;top:0">
-		<p>Left Frame.</p>
-		</div>
-		<div style="float:right;margin-right:15%;"><a href="#" id="righticon" onclick="document.getElementById('therightiframe').style.display='none';document.getElementById('righticon').style.display='none';"><i class="fa fa-window-close" aria-hidden="true"></i></a></div>
+		{{-- <div style="float:left;">
+		<div id="theleftiframe" style="width:15%;height:100%;">
+			<div id='afscontainer1'></div>
 
-		<div > <a href="#"  id="lefticon" onclick="document.getElementById('theleftiframe').style.display='none';document.getElementById('lefticon').style.display='none';"><i class="fa fa-window-close" aria-hidden="true"></i></a></div>	
-		<div id="therightiframe" style="overflow:auto;width:200px;height:100%;background:#ccc;float:right;right:0;top:0;margin-top:-13px;">
+				<script type="text/javascript" charset="utf-8">
+
+				  var pageOptions = {
+				    "pubId": "pub-9616389000213823", // Make sure this the correct client ID!
+				    "query": "hotels",
+				    "adsafe": "medium",
+				    "adPage": 1
+				  };
+
+				  var adblock1 = {
+				    "container": "afscontainer1",
+				    "width": "200",
+				    "maxTop": 1
+				  };
+
+				  _googCsa('ads', pageOptions, adblock1);
+
+				</script>
+		</div>
+		<div>
+		 <a href="#"  id="lefticon" onclick="document.getElementById('theleftiframe').style.display='none';document.getElementById('lefticon').style.display='none';"><i class="fa fa-window-close" aria-hidden="true"></i></a></div>	
+		</div>
+
+		<div style="float: right;">
+		<div><a href="#" id="righticon" onclick="document.getElementById('therightiframe').style.display='none';document.getElementById('righticon').style.display='none';"><i class="fa fa-window-close" aria-hidden="true"></i></a></div>
+		<div id="therightiframe" style="width:15%;height:100%;background:#ccc;">
 		<p>Right Frame.</p>
 		</div>
-		
+		</div> --}}
+
+		<span id="theleftiframe" style="float:left;background:#ccc;width:12%;height:100%;">
+	
+		</span>
+		<a href="#" id="lefticon" onclick="document.getElementById('theleftiframe').style.display='none';document.getElementById('lefticon').style.display='none';"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+
+		<span id="therightiframe" style="float:right;background:#ccc;width:12%;height:100%;">
+			
+		</span>
+		<a href="#" style="float:right; position: relative;z-index: 99;" id="righticon" onclick="document.getElementById('therightiframe').style.display='none';document.getElementById('righticon').style.display='none';"><i class="fa fa-window-close" aria-hidden="true"></i></a>
 		<!-- Highlights -->
 			<section class="wrapper">
 				<div class="inner">
@@ -72,11 +114,7 @@
 	
 
 		<!-- Testimonials -->
-		<div id="footerfix">
-		    This is footer
-			<input id = "btnSubmit" type="submit" value="Release"/>
-			<a href="asa">asasa</a>
-		</div>
+		
 		<!-- Footer -->
 			<footer id="footer">
 				<div class="inner">

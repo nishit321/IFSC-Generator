@@ -55,7 +55,7 @@ class HomeController extends BaseController
    			"banks"=>$bank,
    			"states"=>$states,
    			"selectbank"=>$selectedbankname,
-        "paginatestate" => $paginationstate,
+        "paginateTables" => $paginationstate,
    		]); 		
    	}
    	public function stateLastPage($selectedbank,$selectstate)
@@ -73,7 +73,7 @@ class HomeController extends BaseController
    			  "selectbank"=>$selectedbank,
    			  "selectstate" => $selectstate,
         	"districts" => $district,
-          "paginatedistrict" => $paginatedistrict,
+          "paginateTables" => $paginatedistrict,
         ]);
    		
    	}
@@ -97,7 +97,7 @@ class HomeController extends BaseController
         	"districts" => $district,
         	"selectdistrict" => $selectdistrict,
         	"cities" => $cities,
-          "paginatecity"=>$paginatecity
+          "paginateTables"=>$paginatecity
         ]);				
    	}
    	public function cityLastPage($selectbank,$selectstate,$selectdistrict,$selectcity)
@@ -123,7 +123,7 @@ class HomeController extends BaseController
         	"cities" => $cities,
         	"selectcity" => $selectcity,
         	"branchs" => $branchs,
-          "paginatebranch" => $paginatebranch
+          "paginateTables" => $paginatebranch
         ]);				
    	}
    	public function branchLastPage($selectbank,$selectstate,$selectdistrict,$selectcity,$selectbranch)
