@@ -75,7 +75,7 @@
 		<div id="footerfix">
 		    This is footer
 			<input id = "btnSubmit" type="submit" value="Release"/>
-			<a href="asa">asasa</a>
+			<a href="asa"></a>
 		</div>
 		<!-- Footer -->
 			<footer id="footer">
